@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+<script>
+    var url = "controller.php"
+    var m=0;
+    var r=0;
+    var f=0;
+    window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return; // Do nothing if the event was already processed
+  }
+
+  switch (event.key) {
+    case "ArrowDown":
+    m=-1;
+      // code for "down arrow" key press.
+      break;
+    case "ArrowUp":
+    m=1;
+      // code for "up arrow" key press.
+      break;
+    case "ArrowLeft":
+    r=-1;
+      // code for "left arrow" key press.
+      break;
+    case "ArrowRight":
+    r=1;
+
+      // code for "right arrow" key press.
+      break;
+    case "a":
+    f=(f-1)*-1;
+      // code for "right arrow" key press.
+      break;
+    case "s":
+    m=0;
+    r=0;
+    f=0;
+    
+      // code for "right arrow" key press.
+      break;
+
+    default:
+    let obj = { "m": m, "r":r, "f": f};
+    $.ajax(url, {
+    data : JSON.stringify(obj),
+    contentType : 'application/json',
+    type : 'POST'});
+    console.log(JSON.stringify(obj));
+      return; // Quit when this doesn't handle the key event.
+  }
+  let obj = { "m": m, "r":r, "f": f};
+    $.ajax(url, {
+    data : JSON.stringify(obj),
+    contentType : 'application/json',
+    type : 'POST'});
+    console.log(JSON.stringify(obj));
+
+  // Cancel the default action to avoid it being handled twice
+  event.preventDefault();
+}, true);
+</script>
+    </body>
+    </html>
